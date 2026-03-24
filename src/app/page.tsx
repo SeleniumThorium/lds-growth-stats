@@ -4,7 +4,7 @@ const projects = [
   {
     title: "LDS Growth Statistics",
     description:
-      "Interactive charts tracking the growth of The Church of Jesus Christ of Latter-day Saints from 2000 to 2024. Explore membership, temples, missionaries, stakes, wards, and missions over time.",
+      "Interactive charts tracking the growth of The Church of Jesus Christ of Latter-day Saints from 1830 to the present. Explore membership, temples, missionaries, stakes, wards, and missions over time.",
     href: "/Hastening",
     tags: ["Next.js", "Recharts", "TypeScript"],
     color: "#2563eb",
