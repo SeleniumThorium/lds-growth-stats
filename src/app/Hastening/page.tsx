@@ -12,18 +12,42 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { churchGrowthData, dataCategories } from "@/data/churchGrowth";
+import { churchGrowthData, dataCategories, YearlyStats } from "@/data/churchGrowth";
 
 export default function Home() {
   const [selectedMetric, setSelectedMetric] = useState<string>("totalMembership");
 
   const selectedCategory = dataCategories.find((c) => c.key === selectedMetric);
 
+  // Filter data to only include years where the selected metric has a value
+  const filteredData = churchGrowthData.filter(
+    (d) => d[selectedMetric as keyof YearlyStats] !== null
+  );
+
+  const firstYear = filteredData.length > 0 ? filteredData[0].year : 1830;
+  const lastYear =
+    filteredData.length > 0 ? filteredData[filteredData.length - 1].year : 2024;
+
   const formatNumber = (value: number) => {
     if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
     if (value >= 1_000) return `${(value / 1_000).toFixed(1)}K`;
     return value.toString();
   };
+
+  // Generate sensible tick values for the X axis based on data range
+  const yearSpan = lastYear - firstYear;
+  const tickInterval = yearSpan > 150 ? 20 : yearSpan > 80 ? 10 : 5;
+  const xTicks: number[] = [];
+  const firstTick = Math.ceil(firstYear / tickInterval) * tickInterval;
+  for (let y = firstTick; y <= lastYear; y += tickInterval) {
+    xTicks.push(y);
+  }
+  if (xTicks[0] - firstYear > tickInterval / 2) {
+    xTicks.unshift(firstYear);
+  }
+  if (!xTicks.includes(lastYear) && lastYear - xTicks[xTicks.length - 1] > tickInterval / 3) {
+    xTicks.push(lastYear);
+  }
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -71,18 +95,24 @@ export default function Home() {
         {/* Main chart */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            {selectedCategory?.label} (2000–2024)
+            {selectedCategory?.label} ({firstYear}–{lastYear})
           </h2>
           <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={churchGrowthData}>
+            <LineChart data={filteredData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis dataKey="year" tick={{ fontSize: 12 }} />
+              <XAxis
+                dataKey="year"
+                tick={{ fontSize: 12 }}
+                ticks={xTicks}
+                domain={[firstYear, lastYear]}
+              />
               <YAxis tickFormatter={formatNumber} tick={{ fontSize: 12 }} />
               <Tooltip
                 formatter={(value: number) => [
-                  value.toLocaleString(),
+                  value != null ? value.toLocaleString() : "N/A",
                   selectedCategory?.label,
                 ]}
+                labelFormatter={(label) => `Year: ${label}`}
               />
               <Legend />
               <Line
@@ -91,8 +121,9 @@ export default function Home() {
                 name={selectedCategory?.label}
                 stroke={selectedCategory?.color}
                 strokeWidth={3}
-                dot={{ r: 3 }}
-                activeDot={{ r: 6 }}
+                dot={filteredData.length <= 50 ? { r: 2 } : false}
+                activeDot={{ r: 5 }}
+                connectNulls
               />
             </LineChart>
           </ResponsiveContainer>
@@ -103,7 +134,7 @@ export default function Home() {
           {dataCategories.slice(0, 3).map((category) => {
             const latestValue =
               churchGrowthData[churchGrowthData.length - 1][
-                category.key as keyof (typeof churchGrowthData)[0]
+                category.key as keyof YearlyStats
               ];
             return (
               <div
@@ -112,12 +143,20 @@ export default function Home() {
               >
                 <p className="text-sm text-gray-500">{category.label}</p>
                 <p className="text-2xl font-bold mt-1" style={{ color: category.color }}>
-                  {Number(latestValue).toLocaleString()}
+                  {latestValue != null ? Number(latestValue).toLocaleString() : "—"}
                 </p>
                 <p className="text-xs text-gray-400 mt-1">As of 2024</p>
               </div>
             );
           })}
+        </div>
+
+        {/* Sources */}
+        <div className="mt-8 text-xs text-gray-400">
+          <p>
+            Sources: 2013 Church Almanac, Official Church Statistical Reports,
+            churchofjesuschristtemples.org, Church Newsroom
+          </p>
         </div>
       </div>
     </main>
