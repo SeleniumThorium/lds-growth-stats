@@ -1,118 +1,89 @@
-"use client";
+import Link from "next/link";
 
-import { useState } from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
-import { churchGrowthData, dataCategories } from "@/data/churchGrowth";
+const projects = [
+  {
+    title: "LDS Growth Statistics",
+    description:
+      "Interactive charts tracking the growth of The Church of Jesus Christ of Latter-day Saints from 2000 to 2024. Explore membership, temples, missionaries, stakes, wards, and missions over time.",
+    href: "/Hastening",
+    tags: ["Next.js", "Recharts", "TypeScript"],
+    color: "#2563eb",
+  },
+];
 
 export default function Home() {
-  const [selectedMetric, setSelectedMetric] = useState<string>("totalMembership");
-
-  const selectedCategory = dataCategories.find((c) => c.key === selectedMetric);
-
-  const formatNumber = (value: number) => {
-    if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
-    if (value >= 1_000) return `${(value / 1_000).toFixed(1)}K`;
-    return value.toString();
-  };
-
   return (
-    <main className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200 px-6 py-8">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900">
-            LDS Growth Statistics
+    <main className="min-h-screen bg-gray-950 text-gray-100">
+      {/* Hero */}
+      <header className="border-b border-gray-800 px-6 py-16">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-sm font-mono text-blue-400 mb-3 tracking-wider uppercase">
+            Portfolio
+          </p>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
+            SeleniumThorium Development
           </h1>
-          <p className="mt-2 text-gray-600">
-            Interactive charts tracking the growth of The Church of Jesus Christ
-            of Latter-day Saints
+          <p className="mt-4 text-lg text-gray-400 max-w-2xl">
+            Web applications and data visualizations. Built with modern tools
+            and deployed on AWS.
           </p>
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        {/* Metric selector */}
-        <div className="flex flex-wrap gap-3 mb-8">
-          {dataCategories.map((category) => (
-            <button
-              key={category.key}
-              onClick={() => setSelectedMetric(category.key)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                selectedMetric === category.key
-                  ? "text-white shadow-md"
-                  : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100"
-              }`}
-              style={
-                selectedMetric === category.key
-                  ? { backgroundColor: category.color }
-                  : {}
-              }
+      {/* Projects */}
+      <section className="max-w-4xl mx-auto px-6 py-12">
+        <h2 className="text-sm font-mono text-gray-500 uppercase tracking-wider mb-8">
+          Projects
+        </h2>
+        <div className="space-y-6">
+          {projects.map((project) => (
+            <Link
+              key={project.href}
+              href={project.href}
+              className="block group bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-blue-500/50 hover:bg-gray-900/80 transition-all"
             >
-              {category.label}
-            </button>
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="mt-2 text-gray-400 leading-relaxed">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 text-xs font-mono rounded-md bg-gray-800 text-gray-400 border border-gray-700"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <span className="text-gray-600 group-hover:text-blue-400 transition-colors text-2xl ml-4 mt-1">
+                  &rarr;
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
+      </section>
 
-        {/* Main chart */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            {selectedCategory?.label} (2000–2024)
-          </h2>
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={churchGrowthData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis dataKey="year" tick={{ fontSize: 12 }} />
-              <YAxis tickFormatter={formatNumber} tick={{ fontSize: 12 }} />
-              <Tooltip
-                formatter={(value: number) => [
-                  value.toLocaleString(),
-                  selectedCategory?.label,
-                ]}
-              />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey={selectedMetric}
-                name={selectedCategory?.label}
-                stroke={selectedCategory?.color}
-                strokeWidth={3}
-                dot={{ r: 3 }}
-                activeDot={{ r: 6 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+      {/* Footer */}
+      <footer className="border-t border-gray-800 px-6 py-8 mt-12">
+        <div className="max-w-4xl mx-auto flex items-center justify-between text-sm text-gray-600">
+          <p>SeleniumThorium Development</p>
+          <a
+            href="https://github.com/SeleniumThorium"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-400 transition-colors"
+          >
+            GitHub
+          </a>
         </div>
-
-        {/* Summary cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-          {dataCategories.slice(0, 3).map((category) => {
-            const latestValue =
-              churchGrowthData[churchGrowthData.length - 1][
-                category.key as keyof (typeof churchGrowthData)[0]
-              ];
-            return (
-              <div
-                key={category.key}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
-              >
-                <p className="text-sm text-gray-500">{category.label}</p>
-                <p className="text-2xl font-bold mt-1" style={{ color: category.color }}>
-                  {Number(latestValue).toLocaleString()}
-                </p>
-                <p className="text-xs text-gray-400 mt-1">As of 2024</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      </footer>
     </main>
   );
 }

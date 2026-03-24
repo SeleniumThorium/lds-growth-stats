@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "LDS Growth Statistics",
+  title: "SeleniumThorium Development",
   description:
-    "Interactive charts and data visualizations tracking the growth of The Church of Jesus Christ of Latter-day Saints",
+    "Developer portfolio and projects by SeleniumThorium",
 };
 
 export default function RootLayout({
