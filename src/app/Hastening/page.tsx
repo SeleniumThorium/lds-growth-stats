@@ -131,7 +131,7 @@ export default function Home() {
 
         {/* Summary cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-          {dataCategories.slice(0, 3).map((category) => {
+          {dataCategories.map((category) => {
             const latestValue =
               churchGrowthData[churchGrowthData.length - 1][
                 category.key as keyof YearlyStats

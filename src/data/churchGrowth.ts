@@ -221,6 +221,6 @@ export const dataCategories = [
   { key: "stakes", label: "Stakes", color: "#16a34a" },
   { key: "congregations", label: "Congregations", color: "#9333ea" },
   { key: "missions", label: "Missions", color: "#ea580c" },
-  { key: "temples", label: "Temples", color: "#dc2626" },
+  { key: "temples", label: "Dedicated Temples", color: "#dc2626" },
   { key: "missionariesServing", label: "Full-Time Missionaries", color: "#0891b2" },
 ] as const;
