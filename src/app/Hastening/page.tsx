@@ -60,7 +60,7 @@ export default function Home() {
             &larr; Back to SeleniumThorium Development
           </Link>
           <h1 className="text-3xl font-bold text-gray-900">
-            LDS Growth Statistics
+            Church Growth Statistics
           </h1>
           <p className="mt-2 text-gray-600">
             Interactive charts tracking the growth of The Church of Jesus Christ

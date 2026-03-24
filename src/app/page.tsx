@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const projects = [
   {
-    title: "LDS Growth Statistics",
+    title: "Church Growth Statistics",
     description:
       "Interactive charts tracking the growth of The Church of Jesus Christ of Latter-day Saints from 1830 to the present. Explore membership, temples, missionaries, stakes, wards, and missions over time.",
     href: "/Hastening",
