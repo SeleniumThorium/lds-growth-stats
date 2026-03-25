@@ -9,6 +9,14 @@ const projects = [
     tags: ["Next.js", "Recharts", "TypeScript"],
     color: "#2563eb",
   },
+  {
+    title: "Synoptic Study",
+    description:
+      "A harmony of the four Gospels covering the last 24 hours of the Savior's mortal life. Compare parallel accounts from Matthew, Mark, Luke, and John side by side.",
+    href: "/SynopticStudy",
+    tags: ["Next.js", "TypeScript", "Biblical Studies"],
+    color: "#9333ea",
+  },
 ];
 
 export default function Home() {
