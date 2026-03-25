@@ -6,6 +6,48 @@ import { synopticEvents, gospelColors, SynopticEvent } from "@/data/synopticData
 
 const gospels = ["Matthew", "Mark", "Luke", "John"] as const;
 
+const bookSlugs: Record<string, string> = {
+  Matthew: "matt",
+  Mark: "mark",
+  Luke: "luke",
+  John: "john",
+};
+
+/**
+ * Build a URL to churchofjesuschrist.org for a scripture reference.
+ * Handles formats like "26:17–19", "18:1", "18:13–14, 19–24", "14:1–16:33"
+ */
+function scriptureUrl(book: string, reference: string): string {
+  const slug = bookSlugs[book];
+  const base = "https://www.churchofjesuschrist.org/study/scriptures/nt";
+
+  // Check for cross-chapter ranges like "14:1–16:33"
+  const crossChapter = reference.match(/^(\d+):(\d+)[–-](\d+):(\d+)$/);
+  if (crossChapter) {
+    const [, ch1, v1] = crossChapter;
+    return `${base}/${slug}/${ch1}?lang=eng&id=p${v1}#p${v1}`;
+  }
+
+  // Parse chapter and verse segments like "18:13–14, 19–24"
+  const chapterMatch = reference.match(/^(\d+):(.*)/);
+  if (!chapterMatch) return `${base}/${slug}?lang=eng`;
+
+  const chapter = chapterMatch[1];
+  const versesPart = chapterMatch[2];
+
+  // Build verse ID fragments: "13–14, 19–24" → "p13-p14,p19-p24"
+  const segments = versesPart.split(/,\s*/);
+  const ids = segments.map((seg) => {
+    const range = seg.trim().split(/[–-]/);
+    if (range.length === 2) {
+      return `p${range[0].trim()}-p${range[1].trim()}`;
+    }
+    return `p${range[0].trim()}`;
+  });
+
+  return `${base}/${slug}/${chapter}?lang=eng&id=${ids.join(",")}#${ids[0].split("-")[0]}`;
+}
+
 const timeframeOrder = [
   "Thursday Evening",
   "Thursday Night",
@@ -150,15 +192,18 @@ export default function SynopticStudy() {
                               >
                                 {entry ? (
                                   <>
-                                    <span
-                                      className="inline-block text-xs font-bold px-2 py-0.5 rounded mb-1.5"
+                                    <a
+                                      href={scriptureUrl(gospel, entry.reference)}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-block text-xs font-bold px-2 py-0.5 rounded mb-1.5 hover:underline"
                                       style={{
                                         backgroundColor: `${gospelColors[gospel as keyof typeof gospelColors]}18`,
                                         color: gospelColors[gospel as keyof typeof gospelColors],
                                       }}
                                     >
                                       {entry.reference}
-                                    </span>
+                                    </a>
                                     <p className="text-sm text-gray-600 leading-relaxed">
                                       {entry.summary}
                                     </p>
@@ -224,15 +269,18 @@ export default function SynopticStudy() {
                                 style={{ borderColor: color }}
                               >
                                 <div className="flex items-center gap-2 mb-0.5">
-                                  <span
-                                    className="text-xs font-bold px-2 py-0.5 rounded"
+                                  <a
+                                    href={scriptureUrl(gospel, entry.reference)}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-xs font-bold px-2 py-0.5 rounded hover:underline"
                                     style={{
                                       backgroundColor: `${color}18`,
                                       color,
                                     }}
                                   >
                                     {gospel} {entry.reference}
-                                  </span>
+                                  </a>
                                 </div>
                                 <p className="text-sm text-gray-600">
                                   {entry.summary}
