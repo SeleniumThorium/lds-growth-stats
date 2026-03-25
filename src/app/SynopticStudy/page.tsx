@@ -78,19 +78,19 @@ export default function SynopticStudy() {
   }, {} as Record<string, number>);
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200 px-6 py-8">
+    <main className="min-h-screen bg-gray-50 dark:bg-gray-950">
+      <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-8">
         <div className="max-w-7xl mx-auto">
           <Link
             href="/"
-            className="text-sm text-blue-600 hover:text-blue-800 transition-colors mb-3 inline-block"
+            className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors mb-3 inline-block"
           >
             &larr; Back to SeleniumThorium Development
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
             Synoptic Study
           </h1>
-          <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-gray-600 dark:text-gray-400">
             The Last 24 Hours of the Savior&rsquo;s Mortal Life &mdash; A Harmony of the Four Gospels
           </p>
         </div>
@@ -109,11 +109,11 @@ export default function SynopticStudy() {
                 className={`rounded-xl border p-4 text-left transition-all ${
                   isActive
                     ? "shadow-md ring-2"
-                    : "bg-white border-gray-200 hover:shadow-sm"
+                    : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:shadow-sm"
                 }`}
                 style={
                   isActive
-                    ? { borderColor: color, outlineColor: color, backgroundColor: `${color}08` }
+                    ? { borderColor: color, outlineColor: color, backgroundColor: `${color}18` }
                     : {}
                 }
               >
@@ -122,9 +122,9 @@ export default function SynopticStudy() {
                     className="w-3 h-3 rounded-full inline-block"
                     style={{ backgroundColor: color }}
                   />
-                  <span className="font-semibold text-gray-900">{g}</span>
+                  <span className="font-semibold text-gray-900 dark:text-white">{g}</span>
                 </div>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
                   {gospelCounts[g]} of {synopticEvents.length} events
                 </p>
               </button>
@@ -133,12 +133,12 @@ export default function SynopticStudy() {
         </div>
 
         {/* Timeline table */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
           {/* Desktop table */}
           <div className="hidden lg:block overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="bg-gray-900 text-white">
+                <tr className="bg-gray-900 dark:bg-gray-800 text-white">
                   <th className="px-4 py-3 text-left text-sm font-semibold w-[200px] border-r border-gray-700">
                     Event
                   </th>
@@ -160,10 +160,10 @@ export default function SynopticStudy() {
               <tbody>
                 {grouped.map(({ timeframe, events }) => (
                   <>
-                    <tr key={`tf-${timeframe}`} className="bg-amber-50">
+                    <tr key={`tf-${timeframe}`} className="bg-amber-50 dark:bg-amber-950/40">
                       <td
                         colSpan={5}
-                        className="px-4 py-2 text-sm font-bold text-amber-800 border-b border-amber-200"
+                        className="px-4 py-2 text-sm font-bold text-amber-800 dark:text-amber-400 border-b border-amber-200 dark:border-amber-800/50"
                       >
                         {timeframe}
                       </td>
@@ -173,9 +173,9 @@ export default function SynopticStudy() {
                       return (
                         <tr
                           key={event.id}
-                          className="border-b border-gray-200 hover:bg-blue-50/30 transition-colors"
+                          className="border-b border-gray-200 dark:border-gray-800 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-colors"
                         >
-                          <td className="px-4 py-4 font-medium text-gray-900 border-r border-gray-200 align-top">
+                          <td className="px-4 py-4 font-medium text-gray-900 dark:text-gray-100 border-r border-gray-200 dark:border-gray-800 align-top">
                             <span className="text-sm leading-snug">{event.event}</span>
                           </td>
                           {gospelKeys.map((g) => {
@@ -186,9 +186,9 @@ export default function SynopticStudy() {
                             return (
                               <td
                                 key={g}
-                                className={`px-4 py-4 border-r border-gray-200 last:border-r-0 align-top transition-opacity ${
+                                className={`px-4 py-4 border-r border-gray-200 dark:border-gray-800 last:border-r-0 align-top transition-opacity ${
                                   dimmed ? "opacity-25" : ""
-                                } ${!entry ? "bg-gray-50" : ""}`}
+                                } ${!entry ? "bg-gray-50 dark:bg-gray-950/50" : ""}`}
                               >
                                 {entry ? (
                                   <>
@@ -204,12 +204,12 @@ export default function SynopticStudy() {
                                     >
                                       {entry.reference}
                                     </a>
-                                    <p className="text-sm text-gray-600 leading-relaxed">
+                                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                                       {entry.summary}
                                     </p>
                                   </>
                                 ) : (
-                                  <span className="text-gray-300 block text-center">—</span>
+                                  <span className="text-gray-300 dark:text-gray-700 block text-center">—</span>
                                 )}
                               </td>
                             );
@@ -233,12 +233,12 @@ export default function SynopticStudy() {
                       expandedTimeframe === timeframe ? null : timeframe
                     )
                   }
-                  className="w-full px-4 py-3 bg-amber-50 border-b border-amber-200 flex items-center justify-between"
+                  className="w-full px-4 py-3 bg-amber-50 dark:bg-amber-950/40 border-b border-amber-200 dark:border-amber-800/50 flex items-center justify-between"
                 >
-                  <span className="text-sm font-bold text-amber-800">
+                  <span className="text-sm font-bold text-amber-800 dark:text-amber-400">
                     {timeframe}
                   </span>
-                  <span className="text-amber-600 text-lg">
+                  <span className="text-amber-600 dark:text-amber-500 text-lg">
                     {expandedTimeframe === timeframe ? "−" : "+"}
                   </span>
                 </button>
@@ -246,9 +246,9 @@ export default function SynopticStudy() {
                   events.map((event) => (
                     <div
                       key={event.id}
-                      className="border-b border-gray-200 px-4 py-4"
+                      className="border-b border-gray-200 dark:border-gray-800 px-4 py-4"
                     >
-                      <h3 className="font-semibold text-gray-900 mb-3">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
                         {event.event}
                       </h3>
                       <div className="space-y-3">
@@ -282,7 +282,7 @@ export default function SynopticStudy() {
                                     {gospel} {entry.reference}
                                   </a>
                                 </div>
-                                <p className="text-sm text-gray-600">
+                                <p className="text-sm text-gray-600 dark:text-gray-400">
                                   {entry.summary}
                                 </p>
                               </div>
@@ -299,15 +299,15 @@ export default function SynopticStudy() {
 
         {/* Key insights */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <p className="text-sm text-gray-500">Total Events Chronicled</p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Total Events Chronicled</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
               {synopticEvents.length}
             </p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <p className="text-sm text-gray-500">Events in All Four Gospels</p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Events in All Four Gospels</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
               {
                 synopticEvents.filter(
                   (e) => e.matthew && e.mark && e.luke && e.john
@@ -315,9 +315,9 @@ export default function SynopticStudy() {
               }
             </p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <p className="text-sm text-gray-500">Unique to One Gospel</p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Unique to One Gospel</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
               {
                 synopticEvents.filter((e) => {
                   const count = [e.matthew, e.mark, e.luke, e.john].filter(
@@ -331,7 +331,7 @@ export default function SynopticStudy() {
         </div>
 
         {/* Source note */}
-        <div className="mt-8 text-xs text-gray-400">
+        <div className="mt-8 text-xs text-gray-400 dark:text-gray-500">
           <p>
             Source: The King James Version of the Holy Bible &mdash; the Gospels
             of Matthew, Mark, Luke, and John.
