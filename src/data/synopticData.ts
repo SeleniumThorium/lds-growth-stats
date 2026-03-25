@@ -63,20 +63,20 @@ export const synopticEvents: SynopticEvent[] = [
   {
     id: 6,
     timeframe: "Thursday Evening",
-    event: "Peter's Denial Foretold",
-    matthew: { book: "Matthew", reference: "26:31–35", summary: "Jesus foretells all will be offended; Peter insists he will never deny Him." },
-    mark: { book: "Mark", reference: "14:27–31", summary: "Jesus tells Peter he will deny Him thrice before the cock crows twice." },
-    luke: { book: "Luke", reference: "22:31–34", summary: "Jesus tells Peter that Satan desires to sift him; Peter will deny Him thrice." },
-    john: { book: "John", reference: "13:36–38", summary: "Peter asks where Jesus is going and pledges his life; Jesus foretells the denial." },
-  },
-  {
-    id: 7,
-    timeframe: "Thursday Evening",
     event: "The Intercessory Prayer",
     matthew: null,
     mark: null,
     luke: null,
     john: { book: "John", reference: "17:1–26", summary: "Jesus prays for Himself, His disciples, and all future believers, that they may be one." },
+  },
+  {
+    id: 7,
+    timeframe: "Thursday Evening",
+    event: "Peter's Denial Foretold",
+    matthew: { book: "Matthew", reference: "26:31–35", summary: "Jesus foretells all will be offended; Peter insists he will never deny Him." },
+    mark: { book: "Mark", reference: "14:27–31", summary: "Jesus tells Peter he will deny Him thrice before the cock crows twice." },
+    luke: { book: "Luke", reference: "22:31–34", summary: "Jesus tells Peter that Satan desires to sift him; Peter will deny Him thrice." },
+    john: { book: "John", reference: "13:36–38", summary: "Peter asks where Jesus is going and pledges his life; Jesus foretells the denial." },
   },
   {
     id: 8,
@@ -116,7 +116,7 @@ export const synopticEvents: SynopticEvent[] = [
   },
   {
     id: 12,
-    timeframe: "Early Friday Morning",
+    timeframe: "Thursday Night",
     event: "Peter's Three Denials",
     matthew: { book: "Matthew", reference: "26:69–75", summary: "Peter denies Jesus three times in the courtyard; the cock crows; Peter weeps bitterly." },
     mark: { book: "Mark", reference: "14:66–72", summary: "Peter denies three times; the cock crows a second time; Peter breaks down and weeps." },
