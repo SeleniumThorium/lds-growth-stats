@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SeleniumThorium Development",
+  title: "Seth Manwaring — Senior Product Leader",
   description:
-    "Developer portfolio and projects by SeleniumThorium",
+    "Senior product leader. Regulated SaaS, genomic and operational data, M&A integration. AI-native operator.",
 };
 
 export default function RootLayout({

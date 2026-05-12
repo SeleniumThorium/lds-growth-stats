@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SeleniumThorium">
+  <title>SeleniumThorium</title>
+  <style>
+    rect { fill: none; stroke: #111111; }
+    text { fill: #111111; stroke: none; }
+    @media (prefers-color-scheme: dark) {
+      rect { stroke: #ffffff; }
+      text { fill: #ffffff; }
+    }
+  </style>
+  <rect x="1" y="6" width="30" height="52" rx="4" stroke-width="1.5"/>
+  <text x="4" y="14" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="7">34</text>
+  <text x="16" y="40" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="500">Se</text>
+  <rect x="33" y="6" width="30" height="52" rx="4" stroke-width="1.5"/>
+  <text x="36" y="14" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="7">90</text>
+  <text x="48" y="40" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="500">Th</text>
+</svg>
