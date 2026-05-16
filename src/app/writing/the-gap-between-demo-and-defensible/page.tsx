@@ -27,16 +27,16 @@ export default function GapBetweenDemoAndDefensible() {
               Work
             </Link>
             <Link
-              href="/#projects"
-              className="hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
-              Projects
-            </Link>
-            <Link
               href="/writing"
               className="text-gray-900 dark:text-white"
             >
               Writing
+            </Link>
+            <Link
+              href="/#projects"
+              className="hover:text-gray-900 dark:hover:text-white transition-colors"
+            >
+              Projects
             </Link>
             <a
               href="https://www.linkedin.com/in/sethmanwaring/"
@@ -304,7 +304,7 @@ export default function GapBetweenDemoAndDefensible() {
       </article>
 
       {/* Footer */}
-      <footer className="px-6 py-10 border-t border-gray-200 dark:border-gray-800">
+      <footer className="sticky bottom-0 z-40 bg-white dark:bg-gray-950 px-6 py-6 border-t border-gray-200 dark:border-gray-800">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm text-gray-500 dark:text-gray-400">
           <Link
             href="/writing"

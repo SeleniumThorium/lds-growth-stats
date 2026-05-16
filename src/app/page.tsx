@@ -90,12 +90,12 @@ export default function Home() {
             <a href="#work" className="hover:text-gray-900 dark:hover:text-white transition-colors">
               Work
             </a>
-            <a href="#projects" className="hover:text-gray-900 dark:hover:text-white transition-colors">
-              Projects
-            </a>
             <Link href="/writing" className="hover:text-gray-900 dark:hover:text-white transition-colors">
               Writing
             </Link>
+            <a href="#projects" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+              Projects
+            </a>
             <a
               href={LINKEDIN_URL}
               target="_blank"
@@ -217,6 +217,30 @@ export default function Home() {
       </section>
 
       {/* --------------------------------------------------------------- */}
+      {/* Writing                                                          */}
+      {/* --------------------------------------------------------------- */}
+      <section id="writing" className="px-6 py-20 border-b border-gray-200 dark:border-gray-800">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-xs font-mono uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
+            Writing
+          </h2>
+          <p className="mt-3 text-base text-gray-600 dark:text-gray-300 max-w-2xl">
+            Notes on product judgment in regulated environments, the operating
+            craft of M&amp;A integration, and what AI-native product work
+            actually looks like when the stakes are real.
+          </p>
+          <div className="mt-6">
+            <Link
+              href="/writing"
+              className="inline-flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              Read the articles →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* --------------------------------------------------------------- */}
       {/* Side projects (compressed SeleniumThorium portfolio)             */}
       {/* --------------------------------------------------------------- */}
       <section id="projects" className="px-6 py-20 border-b border-gray-200 dark:border-gray-800">
@@ -267,30 +291,6 @@ export default function Home() {
       </section>
 
       {/* --------------------------------------------------------------- */}
-      {/* Writing                                                          */}
-      {/* --------------------------------------------------------------- */}
-      <section id="writing" className="px-6 py-20 border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-xs font-mono uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
-            Writing
-          </h2>
-          <p className="mt-3 text-base text-gray-600 dark:text-gray-300 max-w-2xl">
-            Notes on product judgment in regulated environments, the operating
-            craft of M&amp;A integration, and what AI-native product work
-            actually looks like when the stakes are real.
-          </p>
-          <div className="mt-6">
-            <Link
-              href="/writing"
-              className="inline-flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              Read the articles →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* --------------------------------------------------------------- */}
       {/* Operating principles                                             */}
       {/* --------------------------------------------------------------- */}
       <section className="px-6 py-16 border-b border-gray-200 dark:border-gray-800">
@@ -307,7 +307,7 @@ export default function Home() {
       {/* --------------------------------------------------------------- */}
       {/* Footer                                                           */}
       {/* --------------------------------------------------------------- */}
-      <footer className="px-6 py-10">
+      <footer className="sticky bottom-0 z-40 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 px-6 py-6">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm text-gray-500 dark:text-gray-400">
           <p>© {new Date().getFullYear()} Seth Manwaring</p>
           <div className="flex items-center gap-6">
@@ -331,7 +331,7 @@ export default function Home() {
               href={`mailto:${EMAIL}`}
               className="hover:text-gray-900 dark:hover:text-white transition-colors"
             >
-              Email
+              Email
             </a>
           </div>
         </div>
