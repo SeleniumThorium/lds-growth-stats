@@ -20,6 +20,13 @@ type Article = {
 
 const articles: Article[] = [
   {
+    title: "Leadership Told You to Look Into AI",
+    href: "/writing/pm-ai-starter-path",
+    date: "2026-05-15",
+    summary:
+      "A starter path for product managers who haven't started yet — and a twelve-rung ladder for going deep once you have.",
+  },
+  {
     title: "The Gap Between Demo and Defensible",
     href: "/writing/the-gap-between-demo-and-defensible",
     date: "2026-05-15",
