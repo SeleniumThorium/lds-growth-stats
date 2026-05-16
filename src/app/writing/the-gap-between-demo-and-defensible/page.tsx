@@ -11,8 +11,8 @@ export default function GapBetweenDemoAndDefensible() {
   return (
     <main className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
       {/* Top nav */}
-      <nav className="border-b border-gray-200 dark:border-gray-800 px-6 py-5">
-        <div className="max-w-5xl mx-auto flex items-center justify-between text-sm">
+      <nav className="sticky top-0 z-50 bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 px-6 py-5">
+        <div className="max-w-5xl mx-auto flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between text-sm">
           <Link
             href="/"
             className="font-semibold tracking-tight text-gray-900 dark:text-white"
