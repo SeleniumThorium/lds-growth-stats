@@ -19,16 +19,13 @@ type Article = {
 };
 
 const articles: Article[] = [
-  // Example entry — uncomment and edit when the first post is ready.
-  //
-  // {
-  //   title: "Master Data Management is the unsexy load-bearing wall of regulated SaaS",
-  //   href: "https://sethmanwaring.substack.com/p/mdm-load-bearing-wall",
-  //   external: true,
-  //   date: "2026-05-15",
-  //   summary:
-  //     "Why the discipline nobody wants to talk about is the one that decides whether the audit holds up.",
-  // },
+  {
+    title: "The Gap Between Demo and Defensible",
+    href: "/writing/the-gap-between-demo-and-defensible",
+    date: "2026-05-15",
+    summary:
+      "AI-native product management: fluency or skepticism? What changes when LLM-shaped capabilities become ambient — and where AI-augmented PMs go wrong.",
+  },
 ];
 
 export default function WritingIndex() {
