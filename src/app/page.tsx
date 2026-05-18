@@ -65,6 +65,13 @@ const sideProjects = [
     href: "/SynopticStudy",
     stack: ["Next.js", "TypeScript", "Editorial Design"],
   },
+  {
+    title: "Biblical Revisions",
+    description:
+      "An interactive catalog of the textual, canonical, and translational turning points in Bible history — from the Septuagint to the LDS edition of the KJV — with the reason for each revision and its doctrinal impact.",
+    href: "/BiblicalRevisions",
+    stack: ["Next.js", "TypeScript", "Editorial Design"],
+  },
 ];
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/sethmanwaring/";
@@ -331,7 +338,7 @@ export default function Home() {
               href={`mailto:${EMAIL}`}
               className="hover:text-gray-900 dark:hover:text-white transition-colors"
             >
-              Email
+              Email
             </a>
           </div>
         </div>
