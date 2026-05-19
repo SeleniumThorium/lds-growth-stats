@@ -1,12 +1,13 @@
-// Historical growth data for The Church of Jesus Christ of Latter-day Saints (1830-2024)
+// Historical growth data for The Church of Jesus Christ of Latter-day Saints (1830-2025)
 //
 // Sources:
-// - Membership: 2013 Church Almanac (1830-2011), Official Church Statistical Reports (2012-2024)
+// - Membership: 2013 Church Almanac (1830-2011), Official Church Statistical Reports (2012-2025)
 // - Temples: churchofjesuschristtemples.org, Church Newsroom, official statistical reports
 // - Stakes: Church Newsroom, official statistical reports, Wikipedia "Stake (Latter Day Saints)"
 // - Missions: Church Newsroom, official statistical reports
 // - Missionaries: Church Newsroom, official statistical reports
 // - Congregations: Church Newsroom, official statistical reports
+// - 2025 figures: 2025 Statistical Report, released April 2026 General Conference
 
 export interface YearlyStats {
   year: number;
@@ -214,6 +215,7 @@ export const churchGrowthData: YearlyStats[] = [
   { year: 2022, totalMembership: 17002461, temples: 175, stakes: 3565, missions: 411, congregations: 31894, missionariesServing: 62544 },
   { year: 2023, totalMembership: 17255394, temples: 186, stakes: 3565, missions: 414, congregations: 31490, missionariesServing: 67871 },
   { year: 2024, totalMembership: 17509781, temples: 202, stakes: 3608, missions: 450, congregations: 31676, missionariesServing: 74127 },
+  { year: 2025, totalMembership: 17887212, temples: 204, stakes: 3695, missions: 451, congregations: 32046, missionariesServing: 78596 },
 ];
 
 export const dataCategories = [

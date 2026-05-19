@@ -159,10 +159,12 @@ export default function Home() {
         {/* Summary cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
           {dataCategories.map((category) => {
-            const latestValue =
-              churchGrowthData[churchGrowthData.length - 1][
-                category.key as keyof YearlyStats
-              ];
+            const latestRow = [...churchGrowthData]
+              .reverse()
+              .find((d) => d[category.key as keyof YearlyStats] != null);
+            const latestValue = latestRow
+              ? latestRow[category.key as keyof YearlyStats]
+              : null;
             return (
               <div
                 key={category.key}
@@ -172,7 +174,9 @@ export default function Home() {
                 <p className="text-2xl font-bold mt-1" style={{ color: category.color }}>
                   {latestValue != null ? Number(latestValue).toLocaleString() : "—"}
                 </p>
-                <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">As of 2024</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                  As of {latestRow ? latestRow.year : "—"}
+                </p>
               </div>
             );
           })}
