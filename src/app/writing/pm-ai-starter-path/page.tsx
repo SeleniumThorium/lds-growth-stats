@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,6 +7,55 @@ export const metadata: Metadata = {
   description:
     "A starter path for product managers who haven't started yet, plus the twelve-rung ladder for going deep once you have.",
 };
+
+const toc = [
+  { id: "starter-path", label: "The starter path" },
+  {
+    id: "the-details",
+    label: "The details",
+    children: [
+      { id: "step-1", label: "1. Pick one tool" },
+      { id: "step-2", label: "2. Use it on existing tasks" },
+      { id: "step-3", label: "3. Iterative prompting" },
+      { id: "step-4", label: "4. Synthesis before generation" },
+      { id: "step-5", label: "5. Apply senior judgment" },
+      { id: "step-6", label: "6. Build a prompt library" },
+      { id: "step-7", label: "7. Stress-testing & pre-mortems" },
+      { id: "step-8", label: "8. Stay honest about errors" },
+    ],
+  },
+  { id: "two-weeks", label: "What two weeks will give you" },
+  {
+    id: "next-stage",
+    label: "The Next Stage",
+    children: [
+      { id: "ladder-1", label: "1. Install natively and pay" },
+      { id: "ladder-2", label: "2. Documents" },
+      { id: "ladder-3", label: "3. Planning artifacts" },
+      { id: "ladder-4", label: "4. Models" },
+      { id: "ladder-5", label: "5. Wire-frames" },
+      { id: "ladder-6", label: "6. System diagrams" },
+      { id: "ladder-7", label: "7. Prototypes" },
+    ],
+  },
+  {
+    id: "stress-testing",
+    label: "Stress-testing and judgment",
+    children: [
+      { id: "ladder-8", label: "8. Four critic lenses" },
+      { id: "ladder-9", label: "9. Read your codebase" },
+    ],
+  },
+  {
+    id: "ai-native",
+    label: "AI-native",
+    children: [
+      { id: "ladder-10", label: "10. Custom Project or GPT" },
+      { id: "ladder-11", label: "11. Redesign templates" },
+      { id: "ladder-12", label: "12. Recalibrate “ready to ship”" },
+    ],
+  },
+];
 
 export default function LeadershipToldYouToLookIntoAI() {
   return (
@@ -72,8 +122,55 @@ export default function LeadershipToldYouToLookIntoAI() {
       </header>
 
       {/* Article body */}
-      <article className="px-6 py-16">
-        <div className="max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
+      <div className="px-6 py-16">
+        <div className="mx-auto max-w-6xl lg:flex lg:items-start lg:gap-12">
+          {/* Table of contents */}
+          <aside className="mb-12 lg:mb-0 lg:w-64 lg:flex-shrink-0 lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
+            <nav aria-label="Table of contents" className="text-sm">
+              <p className="mb-4 font-mono text-xs uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500">
+                Contents
+              </p>
+              <ul className="space-y-1 border-l border-gray-200 dark:border-gray-800">
+                {toc.map((item) => (
+                  <li key={item.id}>
+                    <a
+                      href={`#${item.id}`}
+                      className="-ml-px block border-l-2 border-transparent py-1 pl-4 text-gray-700 transition-colors hover:border-blue-500 hover:text-blue-600 dark:text-gray-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+                    >
+                      {item.label}
+                    </a>
+                    {item.children && (
+                      <ul className="space-y-1">
+                        {item.children.map((child) => (
+                          <li key={child.id}>
+                            <a
+                              href={`#${child.id}`}
+                              className="-ml-px block border-l-2 border-transparent py-1 pl-8 text-gray-500 transition-colors hover:border-blue-500 hover:text-blue-600 dark:text-gray-400 dark:hover:border-blue-400 dark:hover:text-blue-400"
+                            >
+                              {child.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
+
+          {/* Article content */}
+          <article className="max-w-3xl text-gray-700 dark:text-gray-300">
+          <figure className="mb-6 md:float-right md:mb-4 md:ml-8 md:w-60 lg:w-72">
+            <Image
+              src="/pm-ai-before.jpg"
+              alt="A product manager overwhelmed by AI: a faceless figure surrounded by question marks, tangled cables, and scattered papers, with ChatGPT and a PRD on screens behind him."
+              width={582}
+              height={783}
+              className="h-auto w-full rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm"
+              priority
+            />
+          </figure>
           <p className="text-lg leading-relaxed">
             Your CEO just asked you to look into AI and see how it can assist.
             As a product manager, you may have already dabbled in AI or you
@@ -109,9 +206,19 @@ export default function LeadershipToldYouToLookIntoAI() {
             without ceremony.
           </p>
 
-          <h2 className="mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h2 id="starter-path" className="clear-both scroll-mt-24 mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             The starter path
           </h2>
+
+          <figure className="mb-6 md:float-right md:mb-4 md:ml-8 md:w-60 lg:w-72">
+            <Image
+              src="/pm-ai-after.jpg"
+              alt="A confident, AI-native product manager smiling at his desk, surrounded by glowing AI icons, lightbulbs, a success flow chart, and a 'User Growth +20%' metric."
+              width={582}
+              height={783}
+              className="h-auto w-full rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm"
+            />
+          </figure>
 
           <ol className="ml-6 space-y-2 text-lg leading-relaxed list-decimal marker:text-gray-400 dark:marker:text-gray-600">
             <li>Pick one tool and commit to it for two weeks.</li>
@@ -124,11 +231,11 @@ export default function LeadershipToldYouToLookIntoAI() {
             <li>Stay honest about what AI gets wrong.</li>
           </ol>
 
-          <h2 className="mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h2 id="the-details" className="clear-both scroll-mt-24 mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             The details
           </h2>
 
-          <h3 className="mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+          <h3 id="step-1" className="scroll-mt-24 mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
             1. Pick one tool and commit to it for two weeks.
           </h3>
 
@@ -166,7 +273,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             the new default, not the exception.
           </p>
 
-          <h3 className="mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+          <h3 id="step-2" className="scroll-mt-24 mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
             2. Use it on tasks you&rsquo;re already doing.
           </h3>
 
@@ -230,7 +337,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             quickly.
           </p>
 
-          <h3 className="mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+          <h3 id="step-3" className="scroll-mt-24 mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
             3. Learn iterative prompting, not exhaustive prompting.
           </h3>
 
@@ -276,7 +383,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             note and try a different model or a different tool.
           </p>
 
-          <h3 className="mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+          <h3 id="step-4" className="scroll-mt-24 mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
             4. Start with synthesis tasks before generation tasks.
           </h3>
 
@@ -313,7 +420,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             first-draft launch announcements.
           </p>
 
-          <h3 className="mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+          <h3 id="step-5" className="scroll-mt-24 mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
             5. Apply senior product judgment to every output.
           </h3>
 
@@ -343,7 +450,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             rather than dangerous.
           </p>
 
-          <h3 className="mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+          <h3 id="step-6" className="scroll-mt-24 mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
             6. Build a personal prompt library as you go.
           </h3>
 
@@ -393,7 +500,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             keeper.
           </p>
 
-          <h3 className="mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+          <h3 id="step-7" className="scroll-mt-24 mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
             7. Add stress-testing and pre-mortem work to your kit.
           </h3>
 
@@ -445,7 +552,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             your inner critic would.
           </p>
 
-          <h3 className="mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+          <h3 id="step-8" className="scroll-mt-24 mt-10 mb-4 text-xl font-semibold text-gray-900 dark:text-white">
             8. Stay honest about what AI gets wrong and remain skeptical.
           </h3>
 
@@ -476,7 +583,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             AI assistance is too low.
           </p>
 
-          <h2 className="mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h2 id="two-weeks" className="scroll-mt-24 mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             What two weeks of practice will give you
           </h2>
 
@@ -497,7 +604,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             the ones who started before they felt ready. Start today.
           </p>
 
-          <h2 className="mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h2 id="next-stage" className="scroll-mt-24 mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             The Next Stage &mdash; once you&rsquo;ve graduated from web-UI chat
           </h2>
 
@@ -510,7 +617,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             and more.
           </p>
 
-          <p className="mt-8 text-lg leading-relaxed">
+          <p id="ladder-1" className="scroll-mt-24 mt-8 text-lg leading-relaxed">
             <strong>1. Install your LLM tool natively and pay for it.</strong>{" "}
             Run it where it can read and write files on your machine, not
             just chat through a browser tab. This is the unlock for
@@ -518,7 +625,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             doesn&rsquo;t.
           </p>
 
-          <p className="mt-6 text-lg leading-relaxed">
+          <p id="ladder-2" className="scroll-mt-24 mt-6 text-lg leading-relaxed">
             <strong>2. Documents.</strong> Have AI draft, maintain, and
             revise full PRDs and decision memos as working documents &mdash;
             not just sections you copy into Word. The shift from &ldquo;AI
@@ -526,7 +633,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             as the spec evolves&rdquo; is bigger than it sounds.
           </p>
 
-          <p className="mt-6 text-lg leading-relaxed">
+          <p id="ladder-3" className="scroll-mt-24 mt-6 text-lg leading-relaxed">
             <strong>3. Planning artifacts.</strong> Generate quarterly or
             annual roadmaps from your contextual documents &mdash; strategy
             memos, customer research, competitive positioning, prior
@@ -541,7 +648,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             now cheap.
           </p>
 
-          <p className="mt-6 text-lg leading-relaxed">
+          <p id="ladder-4" className="scroll-mt-24 mt-6 text-lg leading-relaxed">
             <strong>4. Models.</strong> Build a one-page ROI or cost model
             for a feature you&rsquo;re considering, with inputs you can
             adjust and assumptions called out explicitly. Pricing, adoption
@@ -549,14 +656,14 @@ export default function LeadershipToldYouToLookIntoAI() {
             defend the assumptions.
           </p>
 
-          <p className="mt-6 text-lg leading-relaxed">
+          <p id="ladder-5" className="scroll-mt-24 mt-6 text-lg leading-relaxed">
             <strong>5. Wire-frames.</strong> Produce low-fidelity UI mockups
             from a written description, then iterate on them with stakeholder
             feedback before engineering ever sees them. You reach a UX
             conversation that used to require a designer&rsquo;s calendar.
           </p>
 
-          <p className="mt-6 text-lg leading-relaxed">
+          <p id="ladder-6" className="scroll-mt-24 mt-6 text-lg leading-relaxed">
             <strong>6. System diagrams.</strong> Generate a data-flow or
             architecture diagram for a feature &mdash; sources,
             transformations, downstream consumers, retention requirements
@@ -565,18 +672,18 @@ export default function LeadershipToldYouToLookIntoAI() {
             diagram itself often becomes the audit artifact.
           </p>
 
-          <p className="mt-6 text-lg leading-relaxed">
+          <p id="ladder-7" className="scroll-mt-24 mt-6 text-lg leading-relaxed">
             <strong>7. Prototypes.</strong> Have AI build a clickable
             prototype in HTML or React and validate UX with customers{" "}
             <em>before</em> you finalize the PRD. The PRD that follows is a
             different document than one drafted from a hunch.
           </p>
 
-          <h2 className="mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h2 id="stress-testing" className="scroll-mt-24 mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             Stress-testing and judgment &mdash; where AI moves from productivity to recalibration
           </h2>
 
-          <p className="text-lg leading-relaxed">
+          <p id="ladder-8" className="scroll-mt-24 text-lg leading-relaxed">
             <strong>
               8. Run any non-trivial decision through four critic lenses in a
               single sitting
@@ -587,7 +694,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             own work because the cost of asking drops.
           </p>
 
-          <p className="mt-6 text-lg leading-relaxed">
+          <p id="ladder-9" className="scroll-mt-24 mt-6 text-lg leading-relaxed">
             <strong>9. Use AI to read your team&rsquo;s codebase</strong>{" "}
             before evaluating a feasibility tradeoff. Most PMs declare
             technical decisions out of scope because reading code costs them
@@ -596,11 +703,11 @@ export default function LeadershipToldYouToLookIntoAI() {
             &mdash; before engineering finishes the design doc.
           </p>
 
-          <h2 className="mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h2 id="ai-native" className="scroll-mt-24 mt-14 mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             AI-native &mdash; judgment reshaped by the tools at hand
           </h2>
 
-          <p className="text-lg leading-relaxed">
+          <p id="ladder-10" className="scroll-mt-24 text-lg leading-relaxed">
             <strong>
               10. Build a custom Project (or GPT) scoped to your product area
             </strong>{" "}
@@ -611,7 +718,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             stays jumped.
           </p>
 
-          <p className="mt-6 text-lg leading-relaxed">
+          <p id="ladder-11" className="scroll-mt-24 mt-6 text-lg leading-relaxed">
             <strong>
               11. Redesign your PRD template, customer research cadence, and
               stakeholder-update format
@@ -622,7 +729,7 @@ export default function LeadershipToldYouToLookIntoAI() {
             work most teams skip.
           </p>
 
-          <p className="mt-6 text-lg leading-relaxed">
+          <p id="ladder-12" className="scroll-mt-24 mt-6 text-lg leading-relaxed">
             <strong>
               12. Recalibrate your definition of &ldquo;ready to ship&rdquo;
             </strong>{" "}
@@ -632,8 +739,9 @@ export default function LeadershipToldYouToLookIntoAI() {
             LLM-shaped capabilities available, and a definition of{" "}
             <em>done</em> that reflects that shift.
           </p>
+          </article>
         </div>
-      </article>
+      </div>
 
       {/* Footer */}
       <footer className="sticky bottom-0 z-40 bg-white dark:bg-gray-950 px-6 py-6 border-t border-gray-200 dark:border-gray-800">
