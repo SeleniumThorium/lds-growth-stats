@@ -123,39 +123,39 @@ export default function OneAfternoonEightDocuments() {
 
           <ol className="mt-6 ml-6 space-y-3 text-lg leading-relaxed list-decimal marker:text-gray-400 dark:marker:text-gray-600">
             <li>
-              A <strong>Product Requirements Document</strong> (Markdown)
+              A <strong>Product Requirements Document</strong>{" "}(Markdown)
               &mdash; the concept specified in detail.
             </li>
             <li>
-              A <strong>Technical Architecture</strong> document (Markdown)
+              A <strong>Technical Architecture</strong>{" "}document (Markdown)
               &mdash; how the product would actually be built.
             </li>
             <li>
-              A <strong>System Diagram</strong> (HTML) &mdash; that
+              A <strong>System Diagram</strong>{" "}(HTML) &mdash; that
               architecture rendered visually.
             </li>
             <li>
-              A <strong>Competitive Landscape</strong> report (DOCX) &mdash; who
+              A <strong>Competitive Landscape</strong>{" "}report (DOCX) &mdash; who
               else occupies this space, and how serious each one is.
             </li>
             <li>
-              A <strong>Market Analysis</strong> (DOCX) &mdash; the size of the
+              A <strong>Market Analysis</strong>{" "}(DOCX) &mdash; the size of the
               opportunity, who the buyers are, and which way the trend is
               moving. This includes an impressive analysis of Total Addressable
               Market, Serviceable Available Market, and Serviceable Obtainable
               Market over my desired timeline.
             </li>
             <li>
-              A <strong>Cost Analysis</strong> &mdash; what building it would
+              A <strong>Cost Analysis</strong>{" "}&mdash; what building it would
               actually cost, compared across different approaches like using a
               Scrum team or vibe coding.
             </li>
             <li>
-              An <strong>IP Protection strategy</strong> &mdash; how to keep the
+              An <strong>IP Protection strategy</strong>{" "}&mdash; how to keep the
               concept defensible as it becomes visible.
             </li>
             <li>
-              A <strong>Brand proposal</strong> &mdash; a screened short-list of
+              A <strong>Brand proposal</strong>{" "}&mdash; a screened short-list of
               brand names that harmonize with its purpose and market, and an
               analysis of brand availability across USPTO trademarks, available
               .com domains, the App Store, and Play Store.
