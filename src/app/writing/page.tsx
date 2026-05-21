@@ -20,6 +20,13 @@ type Article = {
 
 const articles: Article[] = [
   {
+    title: "One Afternoon, Eight Documents",
+    href: "/writing/one-afternoon-eight-documents",
+    date: "2026-05-20",
+    summary:
+      "What it was like to pressure-test a product idea with Claude: a Saturday afternoon that produced eight decision-grade documents — and changed which ideas are worth investigating at all.",
+  },
+  {
     title: "Leadership Told You to Look Into AI",
     href: "/writing/pm-ai-starter-path",
     date: "2026-05-15",
