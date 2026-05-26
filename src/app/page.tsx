@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SeleniumThoriumLogo } from "./components/SeleniumThoriumLogo";
 import { ContactCTAs } from "./components/ContactCTAs";
+import { OpenContactButton } from "./components/OpenContactButton";
 
 // ---------------------------------------------------------------------------
 // Page content lives at the top so it's easy to edit without touching layout.
@@ -75,7 +76,6 @@ const sideProjects = [
 ];
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/sethmanwaring/";
-const GITHUB_URL = "https://github.com/SeleniumThorium";
 
 
 export default function Home() {
@@ -305,7 +305,7 @@ export default function Home() {
             Operating Principles
           </h2>
           <p className="mt-4 text-xl lg:text-2xl font-medium text-gray-900 dark:text-white leading-snug max-w-3xl">
-            Honesty. Loyalty. Applied as decision filters, not as branding.
+            Honesty & Loyalty, applied as decision filters, not as branding.
           </p>
         </div>
       </section>
@@ -325,14 +325,9 @@ export default function Home() {
             >
               LinkedIn
             </a>
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
-              GitHub
-            </a>
+            <OpenContactButton className="hover:text-gray-900 dark:hover:text-white transition-colors">
+              Text Me
+            </OpenContactButton>
           </div>
         </div>
       </footer>

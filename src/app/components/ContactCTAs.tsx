@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -64,8 +64,18 @@ export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
     setErrorMsg("");
   }
 
+  useEffect(() => {
+    function handleOpen() {
+      setOpen(true);
+      setStatus("idle");
+      setErrorMsg("");
+    }
+    window.addEventListener("contact-open", handleOpen);
+    return () => window.removeEventListener("contact-open", handleOpen);
+  }, []);
+
   return (
-    <div className="mt-8">
+    <div id="contact" className="mt-8">
       <div className="flex flex-wrap items-center gap-3">
         <a
           href={linkedinUrl}
