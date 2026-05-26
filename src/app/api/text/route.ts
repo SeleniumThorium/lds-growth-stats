@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error("ntfy publish failed", err);
     return Response.json(
-      { error: "Couldn't deliver the message. Please try email instead." },
+      { error: "Couldn't deliver the message. Please try again, or reach out on LinkedIn." },
       { status: 502 },
     );
   }

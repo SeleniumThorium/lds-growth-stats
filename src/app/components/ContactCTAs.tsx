@@ -6,10 +6,9 @@ type Status = "idle" | "sending" | "sent" | "error";
 
 interface ContactCTAsProps {
   linkedinUrl: string;
-  email: string;
 }
 
-export function ContactCTAs({ linkedinUrl, email }: ContactCTAsProps) {
+export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
@@ -59,6 +58,12 @@ export function ContactCTAs({ linkedinUrl, email }: ContactCTAsProps) {
     }
   }
 
+  function togglePanel() {
+    setOpen((v) => !v);
+    setStatus("idle");
+    setErrorMsg("");
+  }
+
   return (
     <div className="mt-8">
       <div className="flex flex-wrap items-center gap-3">
@@ -79,22 +84,34 @@ export function ContactCTAs({ linkedinUrl, email }: ContactCTAsProps) {
           LinkedIn
         </a>
 
-        <a
-          href={`mailto:${email}`}
+        <button
+          type="button"
+          onClick={togglePanel}
+          aria-expanded={open}
+          aria-controls="contact-panel"
           className="inline-flex items-center gap-2 rounded-md border border-gray-300 dark:border-gray-700 px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-gray-500 dark:hover:border-gray-500 transition-colors"
         >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-4 h-4"
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="m3 7 9 6 9-6" />
+          </svg>
           Email
-        </a>
+        </button>
 
         <button
           type="button"
-          onClick={() => {
-            setOpen((v) => !v);
-            setStatus("idle");
-            setErrorMsg("");
-          }}
+          onClick={togglePanel}
           aria-expanded={open}
-          aria-controls="text-me-panel"
+          aria-controls="contact-panel"
           className="inline-flex items-center gap-2 rounded-md border border-gray-300 dark:border-gray-700 px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-gray-500 dark:hover:border-gray-500 transition-colors"
         >
           <svg
@@ -115,7 +132,7 @@ export function ContactCTAs({ linkedinUrl, email }: ContactCTAsProps) {
 
       {open && (
         <div
-          id="text-me-panel"
+          id="contact-panel"
           className="relative mt-4 max-w-xl rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/40 p-5"
         >
           {status === "sent" ? (

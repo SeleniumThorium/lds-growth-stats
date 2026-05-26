@@ -76,7 +76,6 @@ const sideProjects = [
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/sethmanwaring/";
 const GITHUB_URL = "https://github.com/SeleniumThorium";
-const EMAIL = "sethmanwaring@gmail.com";
 
 
 export default function Home() {
@@ -137,7 +136,7 @@ export default function Home() {
               change-management discipline. AI-native operator using the same
               tools daily that the next generation of products will be built on.
             </p>
-            <ContactCTAs linkedinUrl={LINKEDIN_URL} email={EMAIL} />
+            <ContactCTAs linkedinUrl={LINKEDIN_URL} />
           </div>
 
           {/* Headshot. Drop the source file at /public/headshot.jpg. */}
@@ -333,12 +332,6 @@ export default function Home() {
               className="hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               GitHub
-            </a>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
-              Email
             </a>
           </div>
         </div>
