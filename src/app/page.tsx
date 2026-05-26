@@ -325,7 +325,10 @@ export default function Home() {
             >
               LinkedIn
             </a>
-            <OpenContactButton className="hover:text-gray-900 dark:hover:text-white transition-colors">
+            <OpenContactButton mode="email" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+              Email
+            </OpenContactButton>
+            <OpenContactButton mode="text" className="hover:text-gray-900 dark:hover:text-white transition-colors">
               Text Me
             </OpenContactButton>
           </div>

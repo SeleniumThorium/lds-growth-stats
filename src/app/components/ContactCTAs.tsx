@@ -82,15 +82,24 @@ export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
     setErrorMsg("");
   }
 
-  // Footer Text-Me button dispatches a custom event to open the text panel.
+  // Footer buttons dispatch custom events to open the matching panel.
   useEffect(() => {
-    function handleOpen() {
+    function handleOpenText() {
       setActivePanel("text");
       setStatus("idle");
       setErrorMsg("");
     }
-    window.addEventListener("contact-open-text", handleOpen);
-    return () => window.removeEventListener("contact-open-text", handleOpen);
+    function handleOpenEmail() {
+      setActivePanel("email");
+      setStatus("idle");
+      setErrorMsg("");
+    }
+    window.addEventListener("contact-open-text", handleOpenText);
+    window.addEventListener("contact-open-email", handleOpenEmail);
+    return () => {
+      window.removeEventListener("contact-open-text", handleOpenText);
+      window.removeEventListener("contact-open-email", handleOpenEmail);
+    };
   }, []);
 
   return (
