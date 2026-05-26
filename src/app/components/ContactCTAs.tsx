@@ -3,19 +3,37 @@
 import { useEffect, useState } from "react";
 
 type Status = "idle" | "sending" | "sent" | "error";
+type Panel = "email" | "text" | null;
 
 interface ContactCTAsProps {
   linkedinUrl: string;
 }
 
+// Copy + endpoint that varies between the two panels.
+const PANEL_COPY = {
+  email: {
+    intro: "This sends me an email. Three quick fields:",
+    sentTitle: "Sent — I’ll get back to you.",
+    sentSubtitle: "Your note is in my inbox. Expect a reply within a day.",
+    endpoint: "/api/email",
+  },
+  text: {
+    intro: "This pings my phone directly. Three quick fields:",
+    sentTitle: "Got it — I’ll get back to you.",
+    sentSubtitle: "Your note is on my phone. Expect a reply within a day.",
+    endpoint: "/api/text",
+  },
+} as const;
+
 export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
-  const [open, setOpen] = useState(false);
+  const [activePanel, setActivePanel] = useState<Panel>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (status === "sending") return;
+    if (!activePanel) return;
 
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -36,7 +54,7 @@ export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
     setErrorMsg("");
 
     try {
-      const res = await fetch("/api/text", {
+      const res = await fetch(PANEL_COPY[activePanel].endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -50,7 +68,7 @@ export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
       // Auto-close after a beat so the form is fresh next time.
       window.setTimeout(() => {
         setStatus("idle");
-        setOpen(false);
+        setActivePanel(null);
       }, 3500);
     } catch (err) {
       setStatus("error");
@@ -58,20 +76,21 @@ export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
     }
   }
 
-  function togglePanel() {
-    setOpen((v) => !v);
+  function togglePanel(target: Exclude<Panel, null>) {
+    setActivePanel((p) => (p === target ? null : target));
     setStatus("idle");
     setErrorMsg("");
   }
 
+  // Footer Text-Me button dispatches a custom event to open the text panel.
   useEffect(() => {
     function handleOpen() {
-      setOpen(true);
+      setActivePanel("text");
       setStatus("idle");
       setErrorMsg("");
     }
-    window.addEventListener("contact-open", handleOpen);
-    return () => window.removeEventListener("contact-open", handleOpen);
+    window.addEventListener("contact-open-text", handleOpen);
+    return () => window.removeEventListener("contact-open-text", handleOpen);
   }, []);
 
   return (
@@ -96,8 +115,8 @@ export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
 
         <button
           type="button"
-          onClick={togglePanel}
-          aria-expanded={open}
+          onClick={() => togglePanel("email")}
+          aria-expanded={activePanel === "email"}
           aria-controls="contact-panel"
           className="inline-flex items-center gap-2 rounded-md border border-gray-300 dark:border-gray-700 px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-gray-500 dark:hover:border-gray-500 transition-colors"
         >
@@ -119,8 +138,8 @@ export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
 
         <button
           type="button"
-          onClick={togglePanel}
-          aria-expanded={open}
+          onClick={() => togglePanel("text")}
+          aria-expanded={activePanel === "text"}
           aria-controls="contact-panel"
           className="inline-flex items-center gap-2 rounded-md border border-gray-300 dark:border-gray-700 px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-gray-500 dark:hover:border-gray-500 transition-colors"
         >
@@ -140,7 +159,7 @@ export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
         </button>
       </div>
 
-      {open && (
+      {activePanel && (
         <div
           id="contact-panel"
           className="relative mt-4 max-w-xl rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/40 p-5"
@@ -161,17 +180,17 @@ export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
               </svg>
               <div>
                 <p className="text-sm font-medium text-gray-900 dark:text-white">
-                  Got it — I&apos;ll get back to you.
+                  {PANEL_COPY[activePanel].sentTitle}
                 </p>
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                  Your note is on my phone. Expect a reply within a day.
+                  {PANEL_COPY[activePanel].sentSubtitle}
                 </p>
               </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                This pings my phone directly. Three quick fields:
+                {PANEL_COPY[activePanel].intro}
               </p>
 
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -217,7 +236,7 @@ export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
                 />
               </label>
 
-              {/* Honeypot — must stay empty. Real users won't see this. */}
+              {/* Honeypot — must stay empty. Real users won’t see this. */}
               <div aria-hidden="true" className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden">
                 <label>
                   Website
@@ -247,7 +266,7 @@ export function ContactCTAs({ linkedinUrl }: ContactCTAsProps) {
                 <button
                   type="button"
                   onClick={() => {
-                    setOpen(false);
+                    setActivePanel(null);
                     setStatus("idle");
                     setErrorMsg("");
                   }}

@@ -11,7 +11,7 @@ export function OpenContactButton({ className, children }: OpenContactButtonProp
   function handleClick() {
     if (typeof window === "undefined") return;
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "center" });
-    window.dispatchEvent(new CustomEvent("contact-open"));
+    window.dispatchEvent(new CustomEvent("contact-open-text"));
   }
 
   return (

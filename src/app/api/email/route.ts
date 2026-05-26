@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { Resend } from "resend";
 import { rateLimit, clientIp } from "../../../lib/rateLimit";
 
 // Use the Node runtime so the in-memory rate-limit map in lib/rateLimit
@@ -6,10 +7,11 @@ import { rateLimit, clientIp } from "../../../lib/rateLimit";
 export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
-  const topicUrl = process.env.NTFY_TOPIC_URL;
-  if (!topicUrl) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const recipient = process.env.CONTACT_RECIPIENT_EMAIL;
+  if (!apiKey || !recipient) {
     return Response.json(
-      { error: "Contact endpoint is not configured yet." },
+      { error: "Email endpoint is not configured yet." },
       { status: 503 },
     );
   }
@@ -20,7 +22,6 @@ export async function POST(req: NextRequest) {
   } catch {
     return Response.json({ error: "Invalid request body." }, { status: 400 });
   }
-
   if (typeof body !== "object" || body === null) {
     return Response.json({ error: "Invalid request body." }, { status: 400 });
   }
@@ -62,24 +63,26 @@ export async function POST(req: NextRequest) {
   const lines: string[] = [`From: ${name}`];
   if (contact) lines.push(`Reach back: ${contact}`);
   lines.push("", message);
+  const text = lines.join("\n");
 
+  // If the visitor gave us something that looks like an email, set it as
+  // Reply-To so one tap in Gmail goes back to them.
+  const looksLikeEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(contact);
+
+  const resend = new Resend(apiKey);
   try {
-    const ntfyRes = await fetch(topicUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain; charset=utf-8",
-        // Keep header values ASCII-safe — name lives in the body.
-        Title: "Site message",
-        Tags: "speech_balloon",
-        Priority: "default",
-      },
-      body: lines.join("\n"),
+    const result = await resend.emails.send({
+      from: "Site Contact <onboarding@resend.dev>",
+      to: [recipient],
+      subject: `Contact form: ${name}`,
+      text,
+      replyTo: looksLikeEmail ? contact : undefined,
     });
-    if (!ntfyRes.ok) {
-      throw new Error(`ntfy responded ${ntfyRes.status}`);
+    if (result.error) {
+      throw new Error(result.error.message ?? "Resend error");
     }
   } catch (err) {
-    console.error("ntfy publish failed", err);
+    console.error("resend send failed", err);
     return Response.json(
       { error: "Couldn’t deliver the message. Please try again, or reach out on LinkedIn." },
       { status: 502 },
