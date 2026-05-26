@@ -1,0 +1,21 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        # Promote Amplify console env vars into a .env.production file so
+        # they reach the Next.js SSR runtime (the auto-detected build only
+        # exposes them at build time, not runtime).
+        - env | grep -e RESEND_API_KEY -e CONTACT_RECIPIENT_EMAIL -e NTFY_TOPIC_URL >> .env.production
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*
