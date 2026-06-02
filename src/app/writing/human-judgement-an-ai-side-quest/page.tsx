@@ -3,7 +3,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Human Judgement: An AI Side Quest — Seth Manwaring",
+  title: "Human Judgement and an AI Side Quest — Seth Manwaring",
   description:
     "A sailing trip to Catalina, a broken outboard, and what AI-augmented troubleshooting actually felt like — from someone who has spent 31 years thinking about how senior judgment works.",
 };
@@ -61,7 +61,7 @@ export default function HumanJudgementAnAiSideQuest() {
             &larr; Writing
           </Link>
           <h1 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-white leading-[1.1]">
-            Human Judgement: An AI Side Quest
+            Human Judgement and an AI Side Quest
           </h1>
           <p className="mt-5 text-lg sm:text-xl italic text-gray-600 dark:text-gray-300">
             A sailing trip to Catalina, a broken outboard, and what
@@ -79,14 +79,15 @@ export default function HumanJudgementAnAiSideQuest() {
           <figure className="mb-6 md:float-right md:mb-4 md:ml-8 md:w-60 lg:w-72">
             <Image
               src="/catalina-crossing.jpg"
-              alt="The view forward from the deck of a 37-foot catamaran, looking past the furled jib and rigging across open water toward Catalina Island on a clear, bright day."
+              alt="The view from the deck of a 37-foot catamaran moored at Two Harbors, looking past the furled jib and rigging across Harbor Reef toward Bird Rock in the distance on a clear, bright day."
               width={1500}
               height={1999}
               className="h-auto w-full rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm"
               priority
             />
             <figcaption className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-              Pointed toward Catalina, with the crossing still ahead of us.
+              Moored at Two Harbors &mdash; the view across Harbor Reef, with
+              Bird Rock in the distance.
             </figcaption>
           </figure>
 
@@ -225,8 +226,8 @@ export default function HumanJudgementAnAiSideQuest() {
               Your browser does not support the video tag.
             </video>
             <figcaption className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-              Crossing back to Long Beach on a single healthy engine, wake
-              churning astern.
+              The outboard bucking under load &mdash; the symptom that started
+              the whole diagnostic.
             </figcaption>
           </figure>
 
@@ -309,7 +310,7 @@ export default function HumanJudgementAnAiSideQuest() {
 
           <ul className="mt-6 ml-6 space-y-4 text-lg leading-relaxed list-disc marker:text-gray-400 dark:marker:text-gray-600">
             <li>
-              <strong>I observed carefully</strong> &mdash; not just the original
+              <strong>I observed carefully</strong>{" "}&mdash; not just the original
               symptom but the secondary ones that formed a more comprehensive
               diagnosis.
             </li>
@@ -345,7 +346,7 @@ export default function HumanJudgementAnAiSideQuest() {
               menu; we chose the dish.
             </li>
             <li>
-              <strong>I knew when to stop diagnosing.</strong> Once the linkage
+              <strong>I knew when to stop diagnosing.</strong>{" "}Once the linkage
               held under load, forward and reverse, we tested twice more and
               called it done. The temptation to keep investigating &ldquo;just in
               case&rdquo; is the cousin of the temptation to over-engineer the

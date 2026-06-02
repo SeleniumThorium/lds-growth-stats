@@ -20,7 +20,7 @@ type Article = {
 
 const articles: Article[] = [
   {
-    title: "Human Judgement: An AI Side Quest",
+    title: "Human Judgement and an AI Side Quest",
     href: "/writing/human-judgement-an-ai-side-quest",
     date: "2026-06-02",
     summary:
