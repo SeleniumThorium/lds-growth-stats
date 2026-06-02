@@ -20,6 +20,13 @@ type Article = {
 
 const articles: Article[] = [
   {
+    title: "Human Judgement: An AI Side Quest",
+    href: "/writing/human-judgement-an-ai-side-quest",
+    date: "2026-06-02",
+    summary:
+      "A sailing trip to Catalina, a broken outboard, and a long conversation with Grok — a side-quest case study in what AI-augmented troubleshooting actually demands of human judgment.",
+  },
+  {
     title: "One Afternoon, Eight Documents",
     href: "/writing/one-afternoon-eight-documents",
     date: "2026-05-20",
